@@ -1,0 +1,18 @@
+INSERT INTO aspect (aspect_id, aspect, keywords) VALUES
+(1, 'Kualitas Pelayanan Masyarakat', 'orang, beri, keluar, kurang, layan, lebih, tahu, belum, semua, lama'),
+(2, 'Pengaduan dan Penyelesaian Keluhan', 'laku, keluh, pihak, atas, adu, langsung, tetap, lalu, nyata, milik'),
+(3, 'Masalah Lingkungan di Sekitar', 'rt, depan, pernah, selalu, lama, masuk, padahal, terima, orang, masalah'),
+(4, 'Proses Administrasi dan Informasi Publik', 'tanya, tugas, urus, kata, padahal, bagaimana, nama, bulan, jelas, terus'),
+(5, 'Pelaporan dan Tindak Lanjut Masalah', 'lapor, sama, perlu, tinggal, masalah, mulai, bukan, terus, tahu, sekali'),
+(6, 'Kerusakan Fasilitas dan Infrastruktur', 'masuk, milik, karena, wilayah, bangun, rusak, lebih, atas, ada, ikut'),
+(7, 'Pendidikan dan Sekolah', 'anak, sekolah, bayar, masuk, daftar, terima, sekarang, padahal, tahun, milik'),
+(8, 'Keluhan Kebutuhan Lapangan Pekerjaan', 'kerja, butuh, guna, mulai, lama, sekarang, waktu, ikut, tahun, bulan'),
+(9, 'Permohonan Perbaikan Dan Pembaharuan', 'baik, baru, tutup, sekarang, selesai, lama, lalu, lebih, masuk, tolong'),
+(10, 'Proses Pengajuan', 'aju, data, tahun, proses, belum, padahal, masuk, lama, tolong, jelas'),
+(11, 'Permintaan Informasi dan Bantuan', 'buat, minta, informasi, kena, bukan, padahal, pihak, terima, akhir, semua'),
+(12, 'Durasi dan Efisiensi Layanan', 'apa, jam, waktu, datang, tunggu, selesai, layan, memang, lalu, tanya'),
+(13, 'Permasalahan Parkir', 'tempat, parkir, gang, semua, bukan, tetap, memang, jelas, bayar, padahal'),
+(14, 'Masalah Pohon dan Gangguan Lingkungan', 'banyak, pohon, ganggu, depan_rumah, besar, sekali, lebih, masuk, mulai, ada'),
+(15, 'Penyelesaian Masalah dan Solusi Keluhan', 'lurah, solusi, akhir, masalah, datang, tolong, padahal, lalu, nyata, sekarang'),
+(16, 'Kondisi Lingkungan', 'ada, rt_rw, lokasi, kait, kondisi, atas, gang, ikut, lama, adu'),
+(17, 'Permintaan Dan Pendaftaran', 'tolong, hari, dapat, daftar, arah, belum, lalu, masuk, ikut, padahal');

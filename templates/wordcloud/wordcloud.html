@@ -1,0 +1,172 @@
+<style>
+    .form-inline {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 15px;
+    }
+    .form-inline .form-group {
+        flex: 1;
+        min-width: 220px;
+    }
+    .form-inline .form-label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #495057;
+    }
+    .form-inline .form-text {
+        font-size: 0.875rem;
+        color: #6c757d;
+    }
+    .wordcloud-container {
+        margin-top: 30px;
+        border: 2px solid #007bff;
+        border-radius: 10px;
+        padding: 15px;
+        background-color: #f8f9fa;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+    #wordcloud-results {
+        margin-bottom: 30px;
+    }
+    .wordcloud-container:hover {
+        transform: scale(1.02);
+    }
+    .wordcloud-container img {
+        max-width: 100%;
+        height: auto;
+    }
+    @media (max-width: 768px) {
+        .wordcloud-container {
+            margin: 15px;
+        }
+    }
+    .spinner {
+        display: none;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .form-label {
+        font-weight: bold;
+        color: #495057;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+    .fade-in {
+        animation: fadeIn 1.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+</style>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4 text-primary">WordCloud Generator</h1>
+    
+    <form id="wordcloud-form" method="POST" class="mb-4">
+        <div class="form-inline">
+            <div class="form-group">
+                <label for="year" class="form-label">Pilih Tahun:</label>
+                <select name="year" id="year" class="form-select" required>
+                    <option value="" disabled selected>Pilih Tahun</option>
+                    {% for year in years %}
+                        <option value="{{ year['year'] }}" 
+                                {% if year['year'] == request.form.year %}selected{% endif %}>
+                            {{ year['year'] }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <div class="form-text">Pilih tahun untuk menampilkan WordCloud sesuai data pada tahun yang dipilih</div>
+            </div>
+            <div class="form-group">
+                <label for="aspect_id" class="form-label">Pilih Aspek:</label>
+                <select name="aspect_id" id="aspect_id" class="form-select" required>
+                    {% for aspect in aspects %}
+                        <option value="{{ aspect['aspect_id'] }}" 
+                                {% if aspect['aspect_id'] == request.form.aspect_id %}selected{% endif %}>
+                            {{ aspect['aspect'] }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <div class="form-text">Pilih aspek yang ingin dianalisis, atau pilih <b>Semua Aspek</b> untuk keseluruhan data</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mt-3">Generate WordCloud</button>
+    </form>
+    
+    <!-- Spinner -->
+    <div class="spinner" id="spinner">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2">Generating WordCloud, please wait...</p>
+    </div>
+
+    <!-- Keterangan pilihan -->
+    {% if request.method == 'POST' and not message %}
+        <div id="selection-description" class="alert alert-info mt-3">
+            <strong>Aspect:</strong> 
+            {% for aspect in aspects %}
+                {% if aspect['aspect_id'] == request.form['aspect_id']|int %}
+                    {{ aspect['aspect'] }}
+                {% endif %}
+            {% endfor %}
+            <br>
+            <strong>Year:</strong> {{ request.form.year }}
+        </div>
+    {% endif %}
+
+    <!-- Pesan error jika data tidak ditemukan -->
+    {% if message %}
+        <div id="error-message" class="alert alert-warning mt-3" role="alert">
+            {{ message }}
+        </div>
+    {% endif %}
+    
+    <!-- WordCloud Results -->
+    <div id="wordcloud-results" {% if not wordcloud_paths.netral and not wordcloud_paths.negatif and not wordcloud_paths.keseluruhan %}style="display: none;"{% endif %}>
+        {% if wordcloud_paths.keseluruhan %}
+            <div class="wordcloud-container fade-in text-center">
+                <h3 class="mb-3">WordCloud Keseluruhan Aspek</h3>
+                <img src="{{ url_for('static', filename=wordcloud_paths.keseluruhan.split('static/')[1]) }}" alt="WordCloud Keseluruhan" class="img-fluid">
+            </div>
+        {% endif %}
+        
+        {% if wordcloud_paths.netral %}
+            <div class="wordcloud-container fade-in text-center">
+                <h3 class="mb-3">WordCloud Netral</h3>
+                <img src="{{ url_for('static', filename=wordcloud_paths.netral.split('static/')[1]) }}" alt="WordCloud Netral" class="img-fluid">
+            </div>
+        {% endif %}
+        
+        {% if wordcloud_paths.negatif %}
+            <div class="wordcloud-container fade-in text-center">
+                <h3 class="mb-3">WordCloud Negatif</h3>
+                <img src="{{ url_for('static', filename=wordcloud_paths.negatif.split('static/')[1]) }}" alt="WordCloud Negatif" class="img-fluid">
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#wordcloud-form').on('submit', function() {
+            $('#spinner').fadeIn(); // Tampilkan spinner
+            $('#wordcloud-results').hide(); // Sembunyikan hasil sebelumnya
+            $('#selection-description').hide(); // Sembunyikan hasil sebelumnya
+            $('#error-message').hide(); // Sembunyikan hasil sebelumnya
+        });
+    });
+</script>

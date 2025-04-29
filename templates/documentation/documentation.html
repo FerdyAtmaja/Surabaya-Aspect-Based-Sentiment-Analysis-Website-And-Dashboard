@@ -1,0 +1,77 @@
+<div class="container my-5">
+  <h1 class="text-center mb-5">Cara Menggunakan Alat Analisis Sentimen Komunitas Kami</h1>
+
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6">
+      <h2>1. Unggah Data Anda</h2>
+      <p>Mulailah dengan mengunggah file .xlsx yang berisi data keluhan komunitas selama satu tahun. Pastikan file Anda mencakup teks keluhan dan tanggal.</p>
+      <ul>
+        <li>Klik tombol "Unggah" di bilah navigasi</li>
+        <li>Pilih file .xlsx Anda dari komputer</li>
+        <li>Klik "Kirim" untuk memulai analisis</li>
+      </ul>
+    </div>
+    <div class="col-md-6 text-center">
+      <div style="border: 2px solid #007bff; border-radius: 10px; padding: 30px; background-color: #f8f9fa; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+        <i class="fas fa-upload fa-5x" style="color: #007bff;"></i> <!-- Ikon Unggah -->
+      </div>
+    </div>
+  </div>
+
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6 order-md-2">
+      <h2>2. Lihat Hasil Analisis Sentimen</h2>
+      <p>Setelah data Anda diproses, Anda akan melihat gambaran umum hasil analisis sentimen. Ini termasuk:</p>
+      <ul>
+        <li>Skor sentimen keseluruhan</li>
+        <li>Distribusi sentimen negatif dan netral</li>
+        <li>Tren sentimen dari waktu ke waktu</li>
+      </ul>
+    </div>
+    <div class="col-md-6 order-md-1 text-center">
+      <div style="border: 2px solid #28a745; border-radius: 10px; padding: 30px; background-color: #f8f9fa; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+        <i class="fas fa-chart-line fa-5x" style="color: #28a745;"></i> <!-- Ikon Hasil -->
+      </div>
+    </div>
+  </div>
+
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6">
+      <h2>3. Jelajahi Wawasan Detail</h2>
+      <p>Selami lebih dalam data Anda dengan visualisasi interaktif kami:</p>
+      <ul>
+        <li>Wordcloud yang menunjukkan istilah yang sering digunakan</li>
+        <li>Diagram batang topik keluhan teratas</li>
+        <li>Tren sentimen berdasarkan kategori atau periode waktu</li>
+      </ul>
+    </div>
+    <div class="col-md-6 text-center">
+      <div style="border: 2px solid #ffc107; border-radius: 10px; padding: 30px; background-color: #f8f9fa; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+        <i class="fas fa-search fa-5x" style="color: #ffc107;"></i> <!-- Ikon Wawasan -->
+      </div>
+    </div>
+  </div>
+
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6 order-md-2">
+      <h2>4. Buat dan Ekspor Laporan</h2>
+      <p>Buat laporan yang disesuaikan berdasarkan analisis Anda:</p>
+      <ul>
+        <li>Pilih data dan visualisasi yang ingin Anda sertakan</li>
+        <li>Pilih format yang Anda inginkan (PDF atau Excel)</li>
+        <li>Unduh dan bagikan laporan Anda</li>
+      </ul>
+    </div>
+    <div class="col-md-6 order-md-1 text-center">
+      <div style="border: 2px solid #17a2b8; border-radius: 10px; padding: 30px; background-color: # f8f9fa; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+        <i class="fas fa-file-export fa-5x" style="color: #17a2b8;"></i> <!-- Ikon Ekspor -->
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-5">
+    <h2>Siap untuk Memulai?</h2>
+    <p>Mulailah menganalisis data sentimen komunitas Anda sekarang dan dapatkan wawasan berharga!</p>
+    <a href="{{ url_for('analyze') }}" class="btn btn-primary btn-lg">Unggah Data Anda</a>
+  </div>
+</div>

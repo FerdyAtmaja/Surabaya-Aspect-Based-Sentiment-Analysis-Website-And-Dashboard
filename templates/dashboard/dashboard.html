@@ -1,0 +1,281 @@
+<style>
+    .kpi-container {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+        padding: 10px;
+        background: #f9fafb;
+        border-radius: 8px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .kpi {
+        text-align: center;
+        padding: 15px; /* Mengurangi padding */
+        flex: 1;
+        background: #e7f1ff; /* Latar belakang lebih cerah */
+        border: 2px solid #007bff; /* Border yang lebih mencolok */
+        border-radius: 8px;
+        transition: transform 0.3s; /* Efek transisi */
+    }
+
+    .kpi:hover {
+        transform: scale(1.05); /* Efek hover */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Bayangan saat hover */
+    }
+
+    .kpi h3 {
+        font-size: 18px; /* Ukuran font lebih kecil */
+        color: #333;
+        margin-bottom: 5px; /* Mengurangi jarak */
+        text-transform: uppercase;
+    }
+
+    .kpi .highlight {
+        font-size: 24px; /* Ukuran font nilai lebih kecil */
+        color: #007bff;
+        font-weight: bold;
+    }
+
+    .kpi i {
+        font-size: 20px; /* Ukuran ikon lebih kecil */
+        color: #007bff; /* Warna ikon */
+        margin-bottom: 5px; /* Jarak antara ikon dan teks */
+    }
+    
+
+    .dashboard-page {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+    }
+
+    .dashboard-page .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .dashboard-page header {
+        background: linear-gradient(90deg, #007bff, #0056d2);
+        color: white;
+        padding: 15px 0;
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        border-radius: 8px 8px 0 0;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .dashboard-page .filters {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0;
+        padding: 10px;
+        background: #f9fafb;
+        border-radius: 8px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .dashboard-page .filters form {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .dashboard-page .filters label {
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .dashboard-page .filters select {
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .dashboard-page .filters p {
+        font-size: 14px;
+        color: #555;
+    }
+
+    .dashboard-page .chart-container {
+        margin-bottom: 30px;
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .dashboard-page .chart-container h2 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        text-align: center;
+        border-bottom: 2px solid #007bff;
+        display: inline-block;
+        padding-bottom: 5px;
+    }
+
+    .dashboard-page .chart-container p {
+        font-size: 16px;
+        color: #555;
+        text-align: center;
+        line-height: 1.6;
+    }
+
+    .dashboard-page .summary-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    .dashboard-page .summary-table th,
+    .dashboard-page .summary-table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .dashboard-page .summary-table th {
+        background: #007bff;
+        color: white;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .dashboard-page .summary-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .highlight {
+        color: #007bff;
+        font-weight: bold;
+    }
+</style>
+
+<div class="dashboard-page">
+    <div class="container">
+        <header>Dashboard Analisis Sentimen</header>
+
+        <div class="filters">
+            <form method="POST" action="/dashboard">
+                <label for="year">Pilih Tahun:</label>
+                <select name="year" id="year" onchange="this.form.submit()">
+                    {% for year in years %}
+                    <option value="{{ year['year'] }}" {% if selected_year == year['year'] %}selected{% endif %}>
+                        {{ year['year'] }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </form>
+            <p><strong>Tahun Terpilih:</strong> {{ selected_year }}</p>
+        </div>
+
+        <div class="kpi-container">
+            <div class="kpi">
+                <i class="fas fa-comments"></i> <!-- Ikon untuk Total Keluhan -->
+                <h3>Total Keluhan</h3>
+                <p class="highlight">{{ total_keluhan }}</p>
+            </div>
+            <div class="kpi">
+                <i class="fas fa-meh-blank"></i> <!-- Ikon untuk Keluhan Netral -->
+                <h3>Keluhan Netral</h3>
+                <p class="highlight">{{ keluhan_netral }}</p>
+            </div>
+            <div class="kpi">
+                <i class="fas fa-frown"></i> <!-- Ikon untuk Keluhan Negatif -->
+                <h3>Keluhan Negatif</h3>
+                <p class="highlight">{{ keluhan_negatif }}</p>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h2>📅 Proporsi Sentimen</h2>
+            <div id="pie-chart"></div>
+            <p>
+                Data tahun <span class="highlight">{{ selected_year }}</span> didominasi oleh sentimen <span class="highlight">{{ explanationText }}</span> dengan persentase sebesar <span class="highlight">{{ percentage }}</span>.
+            </p>
+        </div>
+
+        <div class="chart-container">
+            <h2>💬 Rata-rata Sentimen vs Jumlah Keluhan</h2>
+            <div id="bubble-chart"></div>
+            <p>
+                Grafik ini menunjukkan hubungan antara jumlah keluhan dan rata-rata sentimen pada setiap bulan di tahun
+                <span class="highlight">{{ selected_year }}</span>.
+            </p>
+        </div>
+
+        <div class="chart-container">
+            <h2>📊 Distribusi Sentimen per Aspek</h2>
+            <div id="stacked-chart"></div>
+            <p>
+                Setiap aspek memiliki distribusi sentimen yang berbeda-beda, menunjukkan area yang paling membutuhkan
+                perhatian.
+            </p>
+        </div>
+
+        <div class="chart-container">
+            <h2>📈 Tren Keluhan Bulanan</h2>
+            <div id="line-chart"></div>
+            <p>
+                Grafik ini menunjukkan perubahan jumlah keluhan dari bulan ke bulan di tahun
+                <span class="highlight">{{ selected_year }}</span>.
+            </p>
+        </div>
+
+        <div class="chart-container">
+            <h2>📋 Ringkasan Analisis Sentimen</h2>
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th>Aspek</th>
+                        <th>Total Keluhan</th>
+                        <th>Negatif</th>
+                        <th>Netral</th>
+                        <th>Persentase Negatif</th>
+                        <th>Persentase Netral</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ summary_table | safe }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+    var bubbleChartData = {{ bubble_chart | safe }};
+    var stackedChartData = {{ stacked_chart | safe }};
+    var lineChartData = {{ line_chart | safe }};
+    var pieChartData = {{ pie_chart | safe }};
+
+    Plotly.newPlot('bubble-chart', bubbleChartData.data, bubbleChartData.layout);
+    Plotly.newPlot('stacked-chart', stackedChartData.data, stackedChartData.layout);
+    Plotly.newPlot('line-chart', lineChartData.data, lineChartData.layout);
+    Plotly.newPlot('pie-chart', pieChartData.data, pieChartData.layout);
+
+    var layout = {
+    autosize: true,
+    width: 900, // Atur lebar grafik
+    height: 500, // Atur tinggi grafik
+    margin: { l: 50, r: 50, t: 50, b: 50 },
+    paper_bgcolor: '#f4f4f9',
+    plot_bgcolor: '#fff',
+    title: { text: 'Judul Grafik', font: { size: 20 } }
+};
+
+</script>

@@ -1,0 +1,319 @@
+<div class="container" id="overview">
+  <div class="row align-items-center py-5">
+    <!-- Left Side: Text and Button -->
+    <div class="col-lg-6">
+      <div class="overview text-center text-lg-start">
+        <h1 class="display-4 fw-bold mb-4">Surabaya Sentiment Analyzer</h1>
+        <p class="lead mb-4">
+          Ubah suara masyarakat Surabaya menjadi wawasan. Alat analisis sentimen
+          canggih kami memproses data keluhan lokal selama satu tahun, secara
+          instan memvisualisasikan tren untuk membantu pejabat kota membuat
+          keputusan yang tepat dan meningkatkan layanan publik di Surabaya.
+        </p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <a class="btn btn-primary btn-lg px-4 me-md-2" href="{{ url_for('analyze') }}">
+            Unggah Data Surabaya
+          </a>
+          <a class="btn btn-outline-secondary btn-lg px-4" href="{{ url_for('documentation') }}">
+            Cara Kerja
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side: Image -->
+    <div class="col-lg-6 mt-5 mt-lg-0">
+      <div class="right-image text-center">
+        <img
+          src="{{ url_for('static', filename='assets/images/logo_surabaya_low.png') }}"
+          alt="Surabaya Logo"
+          class="img-fluid rounded shadow-lg"
+          style="max-width: 80%"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container my-5" id="features">
+  <h2 class="text-center mb-4">Key Features</h2>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">
+            <i class="fas fa-chart-line text-primary me-2"></i>Analisis Tren
+            Lokal
+          </h5>
+          <p class="card-text">
+            Mengidentifikasi isu-isu yang muncul dan tren jangka panjang yang
+            spesifik untuk komunitas Surabaya.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">
+            <i class="fas fa-language text-success me-2"></i>Berbahasa Indonesia
+          </h5>
+          <p class="card-text">
+            Alat kami dioptimalkan untuk menganalisis keluhan dalam Bahasa
+            Indonesia, memastikan konteks lokal yang akurat.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">
+            <i class="fas fa-brain text-info me-2"></i>Pemodelan Topik
+          </h5>
+          <p class="card-text">
+            Manfaatkan pemodelan topik lanjutan untuk secara otomatis
+            mengidentifikasi dan menganalisis aspek-aspek utama dari keluhan
+            masyarakat.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container my-5" id="faq">
+  <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+  <div class="accordion" id="faqAccordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseOne"
+          aria-expanded="false"
+          aria-controls="collapseOne"
+        >
+          <i class="fas fa-upload me-2"></i> Data jenis apa yang bisa saya
+          unggah?
+        </button>
+      </h2>
+      <div
+        id="collapseOne"
+        class="accordion-collapse collapse"
+        aria-labelledby="headingOne"
+        data-bs-parent="#faqAccordion"
+      >
+        <div class="accordion-body">
+          <p>
+            Anda dapat mengunggah data keluhan masyarakat selama satu tahun.
+            Sistem menerima file .xlsx yang berisi data teks keluhan beserta
+            tanggalnya.
+          </p>
+          <div class="mt-3">
+            <a
+              href="{{ url_for('static', filename='assets/sample.xlsx') }}"
+              download
+              class="btn btn-sm btn-outline-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="Download sample .xlsx"
+            >
+              <i class="fas fa-download"></i> sample.xlsx
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingTwo">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseTwo"
+          aria-expanded="false"
+          aria-controls="collapseTwo"
+        >
+          <i class="fas fa-chart-line me-2"></i> Bagaimana cara kerja analisis
+          sentimen?
+        </button>
+      </h2>
+      <div
+        id="collapseTwo"
+        class="accordion-collapse collapse"
+        aria-labelledby="headingTwo"
+        data-bs-parent="#faqAccordion"
+      >
+        <div class="accordion-body">
+          <p>
+            Sistem kami menggunakan algoritma machine learning untuk menganalisis teks setiap keluhan. Sistem
+            mengkategorikan sentimen sebagai negatif atau netral, dan
+            memberikan skor sentimen secara keseluruhan.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingThree">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseThree"
+          aria-expanded="false"
+          aria-controls="collapseThree"
+        >
+          <i class="fas fa-chart-pie me-2"></i> Visualisasi seperti apa yang
+          disediakan oleh alat ini?
+        </button>
+      </h2>
+      <div
+        id="collapseThree"
+        class="accordion-collapse collapse"
+        aria-labelledby="headingThree"
+        data-bs-parent="#faqAccordion"
+      >
+        <div class="accordion-body">
+          <p>Alat ini menyediakan berbagai visualisasi termasuk:</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <i class="fas fa-chart-line text-primary me-2"></i> Trend Sentimen Berdasarkan Waktu
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-chart-pie text-success me-2"></i> Distribusi Sentimen Per Kategori
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-cloud text-info me-2"></i> Wordcloud Sentimen Berdasarkan Aspek
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-chart-bar text-warning me-2"></i> Perbandingan Proporsi Sentimen Berdasarkan Aspek
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingFour">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseFour"
+          aria-expanded="false"
+          aria-controls="collapseFour"
+        >
+          <i class="fas fa-lock me-2"></i> Apakah data saya aman?
+        </button>
+      </h2>
+      <div
+        id="collapseFour"
+        class="accordion-collapse collapse"
+        aria-labelledby="headingFour"
+        data-bs-parent="#faqAccordion"
+      >
+        <div class="accordion-body">
+          <p>
+            Ya, Semua data yang diunggah dienkripsi dan diproses secara aman.
+            Kami tidak menyimpan atau membagikan data Anda kepada pihak ketiga.
+            Setelah analisis selesai, Anda dapat memilih untuk menyimpan atau
+            menghapus data dari server kami.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingFive">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseFive"
+          aria-expanded="false"
+          aria-controls="collapseFive"
+        >
+          <i class="fas fa-file-export me-2"></i> Bisakah saya mengekspor hasil
+          analisis?
+        </button>
+      </h2>
+      <div
+        id="collapseFive"
+        class="accordion-collapse collapse"
+        aria-labelledby="headingFive"
+        data-bs-parent="#faqAccordion"
+      >
+        <div class="accordion-body">
+          <p>
+            Ya, Anda dapat mengekspor hasil analisis dalam berbagai format,
+            termasuk PDF dan Excel. Ini memungkinkan Anda untuk dengan
+            mudah membagikan wawasan.
+          </p>
+          <div class="mt-3">
+            <button
+              class="btn btn-sm btn-outline-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="Download sample export file"
+            >
+              <i class="fas fa-download"></i> Sample export file
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingSix">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseSix"
+          aria-expanded="false"
+          aria-controls="collapseSix"
+        >
+          <i class="fas fa-brain me-2"></i> Bagaimana pemodelan topik membantu
+          dalam analisis aspek?
+        </button>
+      </h2>
+      <div
+        id="collapseSix"
+        class="accordion-collapse collapse"
+        aria-labelledby="headingSix"
+        data-bs-parent="#faqAccordion"
+      >
+        <div class="accordion-body">
+          <p>
+            Sistem kami menggunakan teknik pemodelan topik tingkat lanjut untuk
+            mengidentifikasi dan menganalisis aspek-aspek kunci dari keluhan
+            masyarakat secara otomatis. Ini membantu dalam:
+          </p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <i class="fas fa-lightbulb text-warning me-2"></i> Menemukan tema
+              tersembunyi dalam keluhan
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-filter text-success me-2"></i> Mengkategorikan
+              keluhan ke dalam topik yang relevan
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-chart-bar text-primary me-2"></i> Memberikan
+              wawasan tentang masalah yang paling umum
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-tasks text-info me-2"></i> Membantu
+              memprioritaskan aspek-aspek untuk perbaikan
+            </li>
+          </ul>
+          <p class="mt-3">
+            Dengan memanfaatkan pemodelan topik, kami dapat memberikan pemahaman
+            yang lebih komprehensif tentang kekhawatiran masyarakat,
+            memungkinkan pengambilan keputusan berbasis data untuk pembangunan
+            Surabaya.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

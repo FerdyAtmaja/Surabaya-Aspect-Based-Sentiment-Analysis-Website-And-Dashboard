@@ -1,0 +1,55 @@
+<nav
+  class="navbar navbar-expand-lg navbar-dark fixed-top"
+  style="background-color: #0056b3"
+>
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img
+        src="{{ url_for('static', filename='assets/images/logo_surabaya_low.png') }}"
+        alt="Logo"
+        width="30"
+        height="30"
+        class="d-inline-block align-text-top me-2"
+      />
+      Surabaya Sentiment Analyzer
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item {% if active_page == 'home' %}active{% endif %}">
+          <a class="nav-link" href="{{ url_for('home') }}">Beranda</a>
+        </li>
+        <li
+          class="nav-item {% if active_page == 'dashboard' %}active{% endif %}"
+        >
+          <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+        </li>
+        <li
+          class="nav-item {% if active_page == 'wordcloud' %}active{% endif %}"
+        >
+          <a class="nav-link" href="{{ url_for('wordcloud') }}">Wordcloud</a>
+        </li>
+        <li class="nav-item {% if active_page == 'analyze' %}active{% endif %}">
+          <a class="nav-link" href="{{ url_for('analyze') }}">Analisis</a>
+        </li>
+        <li
+          class="nav-item {% if active_page == 'documentation' %}active{% endif %}"
+        >
+          <a class="nav-link" href="{{ url_for('documentation') }}"
+            >Dokumentasi</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

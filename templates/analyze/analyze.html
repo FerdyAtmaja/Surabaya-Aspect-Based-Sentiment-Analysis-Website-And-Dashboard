@@ -1,0 +1,219 @@
+<div class="container my-5">
+  <h1 class="text-center mb-5 fw-bold" style="color: var(--primary-color)">
+    Text Analysis Tool
+  </h1>
+
+  <div class="row">
+    <!-- Right column: Instructions -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header py-3">
+          <h2 class="h4 mb-0">
+            <i class="fas fa-info-circle me-2"></i>How to Use
+          </h2>
+        </div>
+        <div class="card-body">
+          <div id="text-instructions">
+            <h5 class="card-title">Petunjuk Input Text</h5>
+            <ol class="list-group list-group-numbered list-group-flush">
+              <li class="list-group-item bg-transparent">
+                ketik atau salin teks yang ingin dianalisis ke dalam "Text Input" box.
+              </li>
+              <li class="list-group-item bg-transparent">
+                Pastikan teks inputan jelas untuk hasil terbaik.
+              </li>
+              <li class="list-group-item bg-transparent">
+                Klik tombol "Analisis Teks" untuk memproses inputan.
+              </li>
+            </ol>
+          </div>
+
+          <div id="file-instructions" style="display: none">
+            <h5 class="card-title">Petunjuk Unggah File</h5>
+            <ol class="list-group list-group-numbered list-group-flush">
+              <li class="list-group-item bg-transparent">
+                <strong>Download templatenya di sini:</strong>
+                <a
+                  href="{{ url_for('static', filename='assets/template.xlsx') }}"
+                  download
+                  class="btn btn-sm btn-primary ms-2"
+                >
+                  <i class="fas fa-download me-2"></i>Unduh Template
+                </a>
+              </li>
+              <li class="list-group-item bg-transparent">
+                Buka template menggunakan Microsoft Excel atau spreadsheet
+              </li>
+              <li class="list-group-item bg-transparent">
+                Isikan data Anda dengan format:
+                <ul class="list-unstyled ms-3 mt-2">
+                  <li>
+                    <i class="fas fa-calendar-alt me-2 text-primary"></i
+                    ><strong>Kolom tanggal:</strong> Gunakan format YYYY-MM-DD HH:MM:SS
+                  </li>
+                  <li>
+                    <i class="fas fa-comment-alt me-2 text-primary"></i
+                    ><strong>Kolom keluhan:</strong> Masukkan teks keluhan
+                  </li>
+                </ul>
+              </li>
+              <li class="list-group-item bg-transparent">
+                Simpan file
+              </li>
+              <li class="list-group-item bg-transparent">
+                Unggah data melalui tombol "Choose File".
+              </li>
+              <li class="list-group-item bg-transparent">
+                Klik "Analisis File" Untuk memproses data anda.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left column: Input -->
+    <div class="col-md-6">
+      <div class="card mb-5">
+        <div class="card-header py-3">
+          <h2 class="h4 mb-0">
+            <i class="fas fa-analytics me-2"></i>Input for Analysis
+          </h2>
+        </div>
+        <div class="card-body">
+          <ul
+            class="nav nav-pills nav-fill mb-4"
+            id="inputTypeTabs"
+            role="tablist"
+          >
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link active"
+                id="text-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#text-input"
+                type="button"
+                role="tab"
+                aria-controls="text-input"
+                aria-selected="true"
+              >
+                <i class="fas fa-keyboard me-2"></i>Text Input
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="file-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#file-input"
+                type="button"
+                role="tab"
+                aria-controls="file-input"
+                aria-selected="false"
+              >
+                <i class="fas fa-file-upload me-2"></i>File Upload
+              </button>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="inputTypeContent">
+            <div
+              class="tab-pane fade show active"
+              id="text-input"
+              role="tabpanel"
+              aria-labelledby="text-tab"
+            >
+              <form action="{{ url_for('process_text') }}" method="post">
+                <div class="mb-3">
+                  <label for="textInput" class="form-label"
+                    >Masukkan Teks:</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="textInput"
+                    name="textInput"
+                    rows="5"
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 py-2">
+                  <i class="fas fa-search me-2"></i>Analisis Teks
+                </button>
+              </form>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="file-input"
+              role="tabpanel"
+              aria-labelledby="file-tab"
+            >
+              <form
+                action="{{ url_for('process_file') }}"
+                method="post"
+                enctype="multipart/form-data"
+              >
+                <div class="mb-3">
+                  <label for="fileUpload" class="form-label"
+                    >Unggah Berkas (Excel):</label
+                  >
+                  <input
+                    class="form-control"
+                    type="file"
+                    id="fileUpload"
+                    name="fileUpload"
+                    accept=".csv,.xlsx,.xls"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-success w-100 py-2">
+                  <i class="fas fa-upload me-2"></i>Analisis File
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="loading-spinner" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.8); z-index: 9999;">
+  <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
+    <div class="spinner-border text-primary" style="width: 4rem; height: 4rem;" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const textTab = document.getElementById("text-tab");
+    const fileTab = document.getElementById("file-tab");
+    const textInstructions = document.getElementById("text-instructions");
+    const fileInstructions = document.getElementById("file-instructions");
+
+    document.querySelector('form').addEventListener('submit', function () {
+      document.getElementById('loading-spinner').style.display = 'block';
+    });
+
+    document.querySelectorAll('form')[1].addEventListener('submit', function () {
+      document.getElementById('loading-spinner').style.display = 'block';
+    });
+
+    function showTextInstructions() {
+      textInstructions.style.display = "block";
+      fileInstructions.style.display = "none";
+    }
+
+    function showFileInstructions() {
+      textInstructions.style.display = "none";
+      fileInstructions.style.display = "block";
+    }
+
+    textTab.addEventListener("click", showTextInstructions);
+    fileTab.addEventListener("click", showFileInstructions);
+
+    // Initialize with text instructions visible
+    showTextInstructions();
+  });
+</script>
