@@ -1,11 +1,12 @@
 import mysql.connector
+import os
 
-# Database configuration
+# Database configuration using environment variables
 config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '',
-    'database': 'db_sentimen'
+    'host': os.getenv('DB_HOST', 'localhost'),
+    'user': os.getenv('DB_USER', 'root'),
+    'password': os.getenv('DB_PASSWORD', ''),
+    'database': os.getenv('DB_NAME', 'db_sentimen')
 }
 
 def get_connection():
@@ -18,6 +19,3 @@ def get_connection():
     except mysql.connector.Error as error:
         print(f'Failed to connect to MySQL database: {error}')
         return None
-
-# Create a connection instance
-connection = get_connection()

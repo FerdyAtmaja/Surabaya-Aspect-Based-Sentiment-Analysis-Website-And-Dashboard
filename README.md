@@ -41,8 +41,23 @@ mysql -u root -p < sentiment_data.sql
 mysql -u root -p < insert_aspect.sql
 ```
 
-4. **Konfigurasi database**
-Edit file `config/database.py` sesuai pengaturan MySQL Anda.
+4. **Konfigurasi Environment Variables**
+Salin file `.env.example` ke `.env` dan sesuaikan dengan pengaturan Anda:
+```bash
+cp .env.example .env
+```
+
+Edit file `.env`:
+```
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=db_sentimen
+SECRET_KEY=your-very-secret-key-here
+FLASK_DEBUG=False
+ADMIN_USERNAME=your_admin_username
+ADMIN_PASSWORD=your_secure_password
+```
 
 ## Penggunaan
 
@@ -109,6 +124,23 @@ AS/
 - `GET /export_excel` - Export hasil ke Excel
 - `GET /export_pdf` - Export laporan ke PDF
 - `POST /save_to_database` - Simpan hasil ke database
+
+## Keamanan
+
+### Perbaikan Keamanan yang Telah Diterapkan:
+- **Environment Variables**: Credentials database dan konfigurasi sensitif dipindahkan ke environment variables
+- **Input Validation**: Validasi input untuk mencegah SQL injection dan XSS
+- **Error Handling**: Error handling yang komprehensif untuk mencegah information disclosure
+- **CSRF Protection**: Flask secret key untuk session management
+- **Authorization**: Perbaikan sistem otorisasi untuk admin functions
+- **Debug Mode**: Debug mode dinonaktifkan untuk production
+
+### Best Practices:
+1. Selalu gunakan environment variables untuk credentials
+2. Jangan commit file `.env` ke repository
+3. Gunakan HTTPS di production
+4. Update dependencies secara berkala
+5. Monitor logs untuk aktivitas mencurigakan
 
 ## Kontribusi
 

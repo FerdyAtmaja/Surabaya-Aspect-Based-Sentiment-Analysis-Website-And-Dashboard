@@ -5,8 +5,12 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 
-# Load the CSV file
-normalization_dict = pd.read_csv('static/assets/normalisasi-dictionary.csv').set_index('takbaku')['baku'].to_dict()
+# Load the CSV file with error handling
+try:
+    normalization_dict = pd.read_csv('static/assets/normalisasi-dictionary.csv').set_index('takbaku')['baku'].to_dict()
+except (FileNotFoundError, pd.errors.EmptyDataError, KeyError) as e:
+    print(f"Warning: Could not load normalization dictionary: {e}")
+    normalization_dict = {}
 
 class TextPreprocessor(BaseEstimator, TransformerMixin):
     def __init__(self, do_stemming=True, do_tokens=True):
